@@ -503,11 +503,14 @@ function updateOperatingPointByIndex(idx) {
   resultDPEl.textContent = h.toFixed(1);
 
   // Calculate Q surface, Q water, Q oil
-  const fvf = parseFloat(fvfInput.value) || 1.0;
-  const wc = parseFloat(wcInput.value) || 0;
-  const q_surface = q / fvf;
-  const q_water = q * (wc / 100);
-  const q_oil = q * (1 - wc / 100);
+ const fvf = parseFloat(document.getElementById('fvfInput').value) || 1.0;
+const wc  = parseFloat(document.getElementById('wcInput').value) || 0;
+const q_water = q * (wc / 100);
+const q_oil   = q * (1 - wc / 100);
+const q_surface = q_water + (q_oil / fvf);
+document.getElementById('resultQSurface').textContent = q_surface.toFixed(1);
+document.getElementById('resultQWater').textContent   = q_water.toFixed(1);
+document.getElementById('resultQOil').textContent     = q_oil.toFixed(1);
   document.getElementById("resultQSurface").textContent = q_surface.toFixed(1);
   document.getElementById("resultQWater").textContent = q_water.toFixed(1);
   document.getElementById("resultQOil").textContent = q_oil.toFixed(1);
